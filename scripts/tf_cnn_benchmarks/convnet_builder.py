@@ -315,7 +315,8 @@ class ConvNetBuilder(object):
       biases = self.get_variable('biases', [num_out_channels],
                                  self.variable_dtype, self.dtype,
                                  initializer=tf.constant_initializer(bias))
-      logits = tf.nn.xw_plus_b(input_layer, kernel, biases)
+      #logits = tf.nn.xw_plus_b(input_layer, kernel, biases)
+      logits = tf.matmul(input_layer,kernel)+biases
       if activation == 'relu':
         affine1 = tf.nn.relu(logits, name=name)
       elif activation == 'linear' or activation is None:
